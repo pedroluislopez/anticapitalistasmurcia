@@ -161,7 +161,8 @@ INSTALLED_APPS = (
     'djangocms_inherit',
     'djangocms_link',
     'reversion',
-    'anticapitalistasmurcia'
+    'anticapitalistasmurcia',
+    'sites_extended'
 )
 
 LANGUAGES = (

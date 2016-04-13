@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}{{ request.current_page.site.name }} | {% page_attribute page_title %}{% endblock title %}</title>
-    {% page_attribute 'meta_description' as meta_description %}<meta name="description" content="{% if meta_description %}{{ meta_description }}{% else %}Anticapitalistas Murcia | Revolucionaria, ecologista, feminista e internacionalista{% endif %}">
+    <title>{% block title %}{{ request.current_page.site.name }} - {% page_attribute page_title %}{% endblock title %}</title>
+    {% page_attribute 'meta_description' as meta_description %}<meta name="description" content="{% if meta_description %}{{ meta_description }}{% else %}Anticapitalistas Murcia - Revolucionaria, ecologista, feminista e internacionalista{% endif %}">
     <link rel="icon" href="{% static 'assets/images/favicon.png' %}">
     {% block preload %}{% endblock preload %}
 
@@ -43,15 +43,47 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-5 hidden-xs">
-                                <a class="title-menu-top display-inline-block" href="mailto:murcia@anticapitalistas.org">murcia@anticapitalistas.org</a>
+                                <a class="title-menu-top display-inline-block" href="mailto:{{ request.current_page.site.extended.email }}">{{ request.current_page.site.extended.email }}</a>
                             </div>
                             <div class="col-sm-7 col-xs-12">
                                 <div class="list-inline social-icons-menu-top pull-right">
-                                    <a href="https://www.facebook.com/anticapitalistasmurcia/" class="social-hover-v1 a-facebook"></a>
-                                    <a href="https://twitter.com/AnticapiMurcia" class="social-hover-v1 a-twitter"></a>
+                                    {% for social_network in request.current_page.site.social_networks.all %}
+                                    <a href="{{ social_network.link }}" class="social-hover-v1 {{ social_network.css_classes }}"></a>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">
+                            <img class="img-responsive"
+                                 src="{% static 'assets/images/logo/logo-default.png' %}" alt="theme-img">
+                        </a>
+                    </div>
+
+                    <div id="navbar" class="navbar-collapse collapse">
+
+                        <ul class="nav navbar-nav navbar-right">
+                            {% show_menu 0 100 100 100 "menu.html" %}
+
+                            <li class="li-search">
+                                <form class="nav-search">
+                                    <label for="focus-input"><i class="fa fa-search"></i></label>
+                                    <input id="focus-input" class="container" type="search" name="s"
+                                           placeholder="To Search, Type and Hit Enter">
+                                </form>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </nav>
