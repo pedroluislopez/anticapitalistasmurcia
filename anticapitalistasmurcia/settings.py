@@ -90,8 +90,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'anticapitalistasmurcia', 'templates/z-theme'),
-            os.path.join(BASE_DIR, 'anticapitalistasmurcia', 'templates/default'),
+            os.path.join(BASE_DIR, 'djangocms_ztheme', 'templates/ztheme'),
+            os.path.join(BASE_DIR, 'anticapitalistasmurcia', 'templates'),
         ],
         'OPTIONS': {
             'context_processors': [
@@ -162,7 +162,7 @@ INSTALLED_APPS = (
     'djangocms_link',
     'reversion',
     'anticapitalistasmurcia',
-    'sites_extended'
+    'djangocms_ztheme'
 )
 
 LANGUAGES = (

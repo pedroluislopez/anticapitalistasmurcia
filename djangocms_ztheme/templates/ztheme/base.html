@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{{ request.current_page.site.name }} - {% page_attribute page_title %}{% endblock title %}</title>
-    {% page_attribute 'meta_description' as meta_description %}<meta name="description" content="{% if meta_description %}{{ meta_description }}{% else %}Anticapitalistas Murcia - Revolucionaria, ecologista, feminista e internacionalista{% endif %}">
+    {% page_attribute 'meta_description' as meta_description %}<meta name="description" content="{% if meta_description and meta_description != 'None' %}{{ meta_description }}{% else %}{{ request.current_page.site.extra.default_meta_description }}{% endif %}">
     <link rel="icon" href="{% static 'assets/images/favicon.png' %}">
     {% block preload %}{% endblock preload %}
 
@@ -43,12 +43,12 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-5 hidden-xs">
-                                <a class="title-menu-top display-inline-block" href="mailto:{{ request.current_page.site.extended.email }}">{{ request.current_page.site.extended.email }}</a>
+                                <a class="title-menu-top display-inline-block" href="mailto:{{ request.current_page.site.extra.email }}">{{ request.current_page.site.extra.email }}</a>
                             </div>
                             <div class="col-sm-7 col-xs-12">
                                 <div class="list-inline social-icons-menu-top pull-right">
                                     {% for social_network in request.current_page.site.social_networks.all %}
-                                    <a href="{{ social_network.link }}" class="social-hover-v1 {{ social_network.css_classes }}"></a>
+                                    <a href="{{ social_network.url }}" class="social-hover-v1 {{ social_network.css_classes }}"></a>
                                     {% endfor %}
                                 </div>
                             </div>
