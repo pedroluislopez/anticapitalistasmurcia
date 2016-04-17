@@ -9,6 +9,7 @@ class SiteExtra(models.Model):
     email = models.EmailField(_("email"))
     default_meta_description = models.TextField(_("default description"), max_length=255, blank=True, null=True,
                                                 help_text=_("The default text displayed in search engines."))
+    copyright = models.TextField(_("copyright"), max_length=255, blank=True, null=True)
 
     class Meta:
         db_table = 'djangocms_ztheme_site_extra'
