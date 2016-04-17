@@ -3,3 +3,4 @@
 .vagrant/*
 ansible/secret/*
 env/*
+media/*

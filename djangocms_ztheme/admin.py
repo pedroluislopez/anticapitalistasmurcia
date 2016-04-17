@@ -12,7 +12,6 @@ class SiteExtraAdmin(admin.StackedInline):
 class SiteSocialNetworkAdmin(admin.TabularInline):
     model = SiteSocialNetwork
 
-SiteAdmin.inlines.append(SiteExtraAdmin)
-SiteAdmin.inlines.append(SiteSocialNetworkAdmin)
+SiteAdmin.inlines = [SiteExtraAdmin, SiteSocialNetworkAdmin]
 admin.site.unregister(Site)
 admin.site.register(Site, SiteAdmin)
