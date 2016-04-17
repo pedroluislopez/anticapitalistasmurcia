@@ -160,8 +160,8 @@ INSTALLED_APPS = (
     'djangocms_inherit',
     'djangocms_link',
     'reversion',
+    'djangocms_ztheme',
     'anticapitalistasmurcia',
-    'djangocms_ztheme'
 )
 
 LANGUAGES = (
