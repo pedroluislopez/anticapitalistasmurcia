@@ -1,5 +1,5 @@
 from django.db import models
-from .models import ZThemeSection, ZThemeRow, ZThemeColumn, ZThemeSectionCallTo, ZThemeSectionFeature
+from .models import ZThemeSection, ZThemeRow, ZThemeColumn, ZThemeSectionCallTo, ZThemeSectionFeatures, ZThemeSectionFeature
 from cms.plugin_base import CMSPluginBase
 from cms.models.pluginmodel import CMSPlugin
 from cms.plugin_pool import plugin_pool
@@ -115,6 +115,16 @@ class ZThemeSectionCallToPlugin(CMSPluginBase):
     render_template = "djangocms_ztheme/section_callto_plugin.html"
     cache = False
 
+    fieldsets = (
+        (None, {
+           'fields': ('title', 'fa_icon', 'link_text', 'url'),
+        }),
+        (_("More"), {
+            'classes': ('collapse',),
+            'fields': ('extra_css_classes',),
+        }),
+    )
+
     def render(self, context, instance, placeholder):
         context = super(ZThemeSectionCallToPlugin, self).render(context, instance, placeholder)
         return context
@@ -124,12 +134,23 @@ plugin_pool.register_plugin(ZThemeSectionCallToPlugin)
 
 class ZThemeSectionFeaturesPlugin(CMSPluginBase):
     module = 'Z Theme sections'
-    model = CMSPlugin
+    model = ZThemeSectionFeatures
     name = _("Features")
     render_template = "djangocms_ztheme/section_features_plugin.html"
     cache = False
     allow_children = True
     child_classes = ['ZThemeSectionFeaturePlugin']
+
+    fieldsets = (
+        (_("More"), {
+            'classes': ('collapse',),
+            'fields': ('extra_css_classes',),
+        }),
+    )
+
+    def render(self, context, instance, placeholder):
+        context = super(ZThemeSectionFeaturesPlugin, self).render(context, instance, placeholder)
+        return context
 
 plugin_pool.register_plugin(ZThemeSectionFeaturesPlugin)
 

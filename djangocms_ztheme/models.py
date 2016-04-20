@@ -171,12 +171,22 @@ class ZThemeSectionCallTo(CMSPlugin):
     fa_icon = models.CharField(_("font awesome icon"), max_length=255)
     link_text = models.CharField(_("link text"), max_length=255)
     url = models.CharField(_("url"), max_length=2048)
+    extra_css_classes = models.CharField(_("extra css classes"), max_length=255, blank=True, null=True,
+                                         help_text=_("Extra CSS classes for HTML tag."))
 
     def __str__(self):
         return self.title
 
     class Meta:
         db_table = 'djangocms_ztheme_section_callto'
+
+
+class ZThemeSectionFeatures(CMSPlugin):
+    extra_css_classes = models.CharField(_("extra css classes"), max_length=255, blank=True, null=True,
+                                         help_text=_("Extra CSS classes for HTML tag."))
+
+    class Meta:
+        db_table = 'djangocms_ztheme_section_features'
 
 
 class ZThemeSectionFeature(CMSPlugin):
