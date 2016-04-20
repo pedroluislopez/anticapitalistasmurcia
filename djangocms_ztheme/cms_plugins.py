@@ -1,5 +1,5 @@
 from django.db import models
-from .models import ZThemeSection, ZThemeRow, ZThemeColumn
+from .models import ZThemeSection, ZThemeRow, ZThemeColumn, ZThemeSectionCallTo, ZThemeSectionFeature
 from cms.plugin_base import CMSPluginBase
 from cms.models.pluginmodel import CMSPlugin
 from cms.plugin_pool import plugin_pool
@@ -106,3 +106,44 @@ class ZThemeSocialNetworksListPlugin(CMSPluginBase):
     cache = False
 
 plugin_pool.register_plugin(ZThemeSocialNetworksListPlugin)
+
+
+class ZThemeSectionCallToPlugin(CMSPluginBase):
+    module = 'Z Theme sections'
+    model = ZThemeSectionCallTo
+    name = _("Call To")
+    render_template = "djangocms_ztheme/section_callto_plugin.html"
+    cache = False
+
+    def render(self, context, instance, placeholder):
+        context = super(ZThemeSectionCallToPlugin, self).render(context, instance, placeholder)
+        return context
+
+plugin_pool.register_plugin(ZThemeSectionCallToPlugin)
+
+
+class ZThemeSectionFeaturesPlugin(CMSPluginBase):
+    module = 'Z Theme sections'
+    model = CMSPlugin
+    name = _("Features")
+    render_template = "djangocms_ztheme/section_features_plugin.html"
+    cache = False
+    allow_children = True
+    child_classes = ['ZThemeSectionFeaturePlugin']
+
+plugin_pool.register_plugin(ZThemeSectionFeaturesPlugin)
+
+
+class ZThemeSectionFeaturePlugin(CMSPluginBase):
+    module = 'Z Theme sections'
+    model = ZThemeSectionFeature
+    name = _("Feature")
+    render_template = "djangocms_ztheme/section_feature_plugin.html"
+    cache = False
+    parent_classes = ['ZThemeSectionFeaturesPlugin']
+
+    def render(self, context, instance, placeholder):
+        context = super(ZThemeSectionFeaturePlugin, self).render(context, instance, placeholder)
+        return context
+
+plugin_pool.register_plugin(ZThemeSectionFeaturePlugin)

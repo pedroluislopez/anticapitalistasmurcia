@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.sites.models import Site
 from cms.models.pluginmodel import CMSPlugin
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MaxValueValidator
 
 
 class SiteExtra(models.Model):
@@ -74,7 +74,7 @@ class ZThemeRow(CMSPlugin):
         css_classes = 'row'
 
         if self.extra_css_classes:
-            css_classes += ' ' + self.extra_css_classes
+            css_classes += ' ' + str(self.extra_css_classes)
 
         return css_classes
 
@@ -156,7 +156,7 @@ class ZThemeColumn(CMSPlugin):
         if self.lg_pull is not None:
             css_classes += ' col-lg-pull-' + str(self.lg_pull)
         if self.extra_css_classes:
-            css_classes += ' ' + self.extra_css_classes
+            css_classes += ' ' + str(self.extra_css_classes)
 
         if len(css_classes) > 0:
             return css_classes[1:]
@@ -164,3 +164,28 @@ class ZThemeColumn(CMSPlugin):
 
     class Meta:
         db_table = 'djangocms_ztheme_column'
+
+
+class ZThemeSectionCallTo(CMSPlugin):
+    title = models.CharField(_("title"), max_length=255)
+    fa_icon = models.CharField(_("font awesome icon"), max_length=255)
+    link_text = models.CharField(_("link text"), max_length=255)
+    url = models.CharField(_("url"), max_length=2048)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = 'djangocms_ztheme_section_callto'
+
+
+class ZThemeSectionFeature(CMSPlugin):
+    title = models.CharField(_("title"), max_length=255)
+    fa_icon = models.CharField(_("font awesome icon"), max_length=255)
+    description = models.TextField(_("description"), max_length=2048, blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = 'djangocms_ztheme_section_feature'
