@@ -48,9 +48,9 @@
                             </div>
                             <div class="col-sm-7 col-xs-12">
                                 <div class="list-inline social-icons-menu-top pull-right">
-                                    {% for social_network in request.current_page.site.social_networks.all %}
-                                    <a href="{{ social_network.url }}" class="social-hover-v1 {{ social_network.css_classes }}"></a>
-                                    {% endfor %}
+                                    {% for social_network in request.current_page.site.social_networks.all %}{% if social_network.top_menu %}
+                                    <a href="{{ social_network.url }}" class="social-hover-v1 a-{{ social_network.name | lower }}"></a>
+                                    {% endif %}{% endfor %}
                                 </div>
                             </div>
                         </div>

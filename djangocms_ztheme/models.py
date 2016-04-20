@@ -19,10 +19,9 @@ class SiteExtra(models.Model):
 
 class SiteSocialNetwork(models.Model):
     site = models.ForeignKey(Site, models.CASCADE, verbose_name=_("Site"), related_name='social_networks')
-    name = models.CharField(_("name"), max_length=255)
+    name = models.CharField(_("name"), max_length=255, help_text=_("Name is used for CSS classes."))
     url = models.CharField(_("url"), max_length=2048)
-    css_classes = models.CharField(_("css classes"), max_length=255, blank=True, null=True,
-                                   help_text=_("Extra CSS classes for <a> HTML tag."))
+    top_menu = models.BooleanField(_("top menu"), default=False)
 
     def __str__(self):
         return self.name
@@ -64,6 +63,25 @@ class ZThemeSection(CMSPlugin):
         db_table = 'djangocms_ztheme_section'
 
 
+class ZThemeRow(CMSPlugin):
+    extra_css_classes = models.CharField(_("extra css classes"), max_length=255, blank=True, null=True,
+                                         help_text=_("Extra CSS classes for HTML tag."))
+
+    def __str__(self):
+        return self.css_classes()
+
+    def css_classes(self):
+        css_classes = 'row'
+
+        if self.extra_css_classes:
+            css_classes += ' ' + self.extra_css_classes
+
+        return css_classes
+
+    class Meta:
+        db_table = 'djangocms_ztheme_row'
+
+
 class ZThemeColumn(CMSPlugin):
     xs_columns = models.PositiveSmallIntegerField(_("columns"), blank=True, null=True,
                                                   validators=[MaxValueValidator(12)])
@@ -97,6 +115,8 @@ class ZThemeColumn(CMSPlugin):
                                                validators=[MaxValueValidator(12)])
     lg_pull = models.PositiveSmallIntegerField(_("pull"), blank=True, null=True,
                                                validators=[MaxValueValidator(12)])
+    extra_css_classes = models.CharField(_("extra css classes"), max_length=255, blank=True, null=True,
+                                         help_text=_("Extra CSS classes for HTML tag."))
 
     def __str__(self):
         return self.css_classes()
@@ -135,6 +155,8 @@ class ZThemeColumn(CMSPlugin):
             css_classes += ' col-lg-push-' + str(self.lg_push)
         if self.lg_pull is not None:
             css_classes += ' col-lg-pull-' + str(self.lg_pull)
+        if self.extra_css_classes:
+            css_classes += ' ' + self.extra_css_classes
 
         if len(css_classes) > 0:
             return css_classes[1:]
