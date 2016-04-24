@@ -2,6 +2,7 @@
 __pycache__
 .idea/*
 .vagrant/*
+ansible/inventory/*
 ansible/secret/*
 media/*
 env/*
