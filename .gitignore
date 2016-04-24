@@ -2,6 +2,7 @@
 __pycache__
 .idea/*
 .vagrant/*
+ansible.cfg
 ansible/inventory/*
 ansible/secret/*
 media/*
