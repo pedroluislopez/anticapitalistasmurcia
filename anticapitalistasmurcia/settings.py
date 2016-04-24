@@ -169,6 +169,7 @@ INSTALLED_APPS = (
     'aldryn_newsblog',
     'aldryn_people',
     'aldryn_reversion',
+    'aldryn_translation_tools',
     'parler',
     'sortedm2m',
     'taggit',
