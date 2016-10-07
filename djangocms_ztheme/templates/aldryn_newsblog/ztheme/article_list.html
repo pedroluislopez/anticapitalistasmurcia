@@ -1,0 +1,38 @@
+{% extends "aldryn_newsblog/base.html" %}
+{% load cms_tags i18n thumbnail apphooks_config_tags menu_tags %}
+
+{% block newsblog_content %}
+<div class="section-heading-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1 class="heading-page text-center-xs">{% page_attribute page_title %}</h1>
+            </div>
+
+            <div class="col-sm-6">
+                <ol class="breadcrumb text-right text-center-xs">
+                    {% show_breadcrumb "breadcrumb.html" %}
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 grid-posts">
+            {% for article in article_list %}
+            {% include "aldryn_newsblog/ztheme/includes/article.html" %}
+            {% empty %}
+            <p>{% trans "No items available" %}</p>
+            {% endfor %}
+
+            {% include "aldryn_newsblog/ztheme/includes/pagination.html" %}
+        </div>
+
+        <div class="col-sm-4 grid-sidebar">
+            {% static_placeholder "sidebar" %}
+        </div>
+    </div>
+</div>
+{% endblock %}
