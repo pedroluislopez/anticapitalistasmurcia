@@ -1,7 +1,0 @@
-<div class="text-theme">
-    <ul class="list-inline">
-        {% for social_network in request.current_page.site.social_networks.all %}
-        <li><a href="{{ social_network.url }}"><i class="fa fa-{{ social_network.name | lower }} fa-round"></i></a></li>
-        {% endfor %}
-    </ul>
-</div>

@@ -1,0 +1,3 @@
+[submodule "djangocms_ztheme"]
+	path = djangocms_ztheme
+	url = git@git.compraactiva.me:plopez/djangocms_ztheme.git

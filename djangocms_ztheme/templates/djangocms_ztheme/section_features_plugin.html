@@ -1,9 +1,0 @@
-{% load cms_tags %}
-
-<div class="section section-sm section-both {{ instance.extra_css_classes }}">
-    <div class="container">
-        <div class="row">
-            {% for plugin in instance.child_plugin_instances %}{% render_plugin plugin %}{% endfor %}
-        </div>
-    </div>
-</div>
